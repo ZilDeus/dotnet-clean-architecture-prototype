@@ -8,11 +8,18 @@ namespace GymManagement.Api.Controllers;
 public class SubscriptionsController : ControllerBase
 {
   private readonly IMediator _mediator;
+
   public SubscriptionsController(IMediator mediator){
     _mediator = mediator;
   }
+
   [HttpPost]
   public async Task<IActionResult> CreateSubscription(CreateSubscriptionCommand request){
-    return Ok(await _mediator.Send(request));
+
+    var response = await _mediator.Send(request);
+    return response.MatchFirst(
+        data => Ok(data),
+        _ => Problem()
+        );
   }
 }

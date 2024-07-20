@@ -1,11 +1,12 @@
 using MediatR;
+using ErrorOr;
 
 namespace GymManagement.Application.Subscriptions;
 
-public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscriptionCommand, Guid>
+public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscriptionCommand, ErrorOr<Guid>>
 {
-    public Task<Guid> Handle(CreateSubscriptionCommand request, CancellationToken cancellationToken)
-    {
-        return Task.FromResult(request.AdminId);
-    }
+  public async Task<ErrorOr<Guid>> Handle(CreateSubscriptionCommand request, CancellationToken cancellationToken)
+  {
+    return Guid.NewGuid();
+  }
 }
