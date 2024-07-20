@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GymManagement.Application\GymManagement.Application.csproj" />
+    <ProjectReference Include="..\..\core\GymManagement.Application\GymManagement.Application.csproj" />
   </ItemGroup>
 
 </Project>
