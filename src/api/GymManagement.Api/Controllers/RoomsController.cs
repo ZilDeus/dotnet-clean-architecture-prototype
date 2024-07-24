@@ -1,21 +1,14 @@
 using GymManagement.Application.Rooms.Commands.CreateRoom;
 using GymManagement.Application.Rooms.Commands.DeleteRoom;
-using GymManagement.Contracts.Rooms;
+using GymManagement.Dtos.Rooms;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManagement.Api.Controllers;
 
 [Route("gyms/{gymId:guid}/rooms")]
-public class RoomsController : ApiController
+public class RoomsController(ISender _mediator) : ApiController
 {
-    private readonly ISender _mediator;
-
-    public RoomsController(ISender mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpPost]
     public async Task<IActionResult> CreateRoom(
         CreateRoomRequest request,

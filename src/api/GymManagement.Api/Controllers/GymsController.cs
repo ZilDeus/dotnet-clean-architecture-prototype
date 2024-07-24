@@ -1,24 +1,18 @@
+using ErrorOr;
 using GymManagement.Application.Gyms.Commands.AddTrainer;
 using GymManagement.Application.Gyms.Commands.CreateGym;
 using GymManagement.Application.Gyms.Commands.DeleteGym;
 using GymManagement.Application.Gyms.Queries.GetGym;
 using GymManagement.Application.Gyms.Queries.ListGyms;
-using GymManagement.Contracts.Gyms;
+using GymManagement.Dtos.Gyms;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManagement.Api.Controllers;
 
 [Route("subscriptions/{subscriptionId:guid}/gyms")]
-public class GymsController : ApiController
+public class GymsController(ISender _mediator) : ApiController
 {
-    private readonly ISender _mediator;
-
-    public GymsController(ISender mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpPost]
     public async Task<IActionResult> CreateGym(
         CreateGymRequest request,
